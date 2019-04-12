@@ -19,4 +19,15 @@ $headingColor: #101010;
 	@include radial-gradient( rgba(237,157,63,1), rgba(242,178,67,1) );
 }
 
+
+	.reveal section img.plain {
+		background: none;
+	}
+
+  .reveal section.disclaimer h2{
+    color: red;
+  }
+  .reveal section.disclaimer h3{
+    color: white;
+  }
 @import "../template/theme";

@@ -1,5 +1,14 @@
 @import url(../../lib/font/league-gothic/league-gothic.css);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+.reveal section img.plain {
+  background: none; }
+
+.reveal section.disclaimer h2 {
+  color: red; }
+
+.reveal section.disclaimer h3 {
+  color: white; }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
