@@ -306,3 +306,14 @@ body {
   left: 0%;
   margin-left: 10px;
   margin-bottom: 10px; }
+
+.reveal .footer-right {
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  margin-right: -15%;
+  margin-bottom: 0; }
+
+.reveal .footer-emoji {
+  font-family: Apple Color Emoji,Segoe UI,Segoe UI Emoji,Segoe UI Symbol;
+  font-size: 3.77em; }

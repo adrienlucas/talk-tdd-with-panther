@@ -36,6 +36,7 @@ $headingColor: #101010;
 .reveal cite{
   font-size: 20px;
 }
+
 /* 1. Style header/footer <div> so they are positioned as desired. */
 #header-left {
     position: absolute;
@@ -59,4 +60,16 @@ $headingColor: #101010;
     left: 0%;
     margin-left: 10px;
     margin-bottom: 10px;
+}
+.reveal .footer-right {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    margin-right: -15%;
+    margin-bottom: 0;
+}
+
+.reveal .footer-emoji {
+  font-family: Apple Color Emoji,Segoe UI,Segoe UI Emoji,Segoe UI Symbol;
+  font-size: 3.77em;
 }
