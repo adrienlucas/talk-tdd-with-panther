@@ -105,6 +105,18 @@ $mainColor: #101010;
   // color: #ED9D3F;
 	color: #ED8000;
 }
-.reveal section.txt-padtop h1 {
- padding-bottom: 0.5em;
+.reveal section.txt-padtop h2 {
+ top: -1em;
+}
+
+.reveal h1{
+	text-transform: uppercase;
+}
+
+.reveal h2{
+	text-transform: capitalize;
+}
+
+.reveal h3, .reveal h4 {
+	text-transform: none;
 }

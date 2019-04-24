@@ -343,5 +343,14 @@ body {
 .reveal section.txt-orange h2, .reveal section.txt-orange h1 {
   color: #ED8000; }
 
-.reveal section.txt-padtop h1 {
-  padding-bottom: 0.5em; }
+.reveal section.txt-padtop h2 {
+  top: -1em; }
+
+.reveal h1 {
+  text-transform: uppercase; }
+
+.reveal h2 {
+  text-transform: capitalize; }
+
+.reveal h3, .reveal h4 {
+  text-transform: none; }
