@@ -11,12 +11,12 @@ $headingTextShadow: 1px 1px 1px #C6E5EF;
 $heading1TextShadow: 2px 2px 2px #C6E5EF;
 // $heading1TextShadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 20px 20px rgba(0,0,0,.15);
 
-$mainColor: #ffffff;
-$headingColor: #101010;
+$headingColor: #3B3B3B;
+$mainColor: #101010;
 
 // Background generator
 @mixin bodyBackground() {
-	@include radial-gradient( rgba(237,157,63,1), rgba(242,178,67,1) );
+	@include radial-gradient( rgba(237,157,63,1), rgba(255, 205, 94,1) );
 }
 
 @import "../template/theme";
@@ -24,6 +24,10 @@ $headingColor: #101010;
 
 .reveal section img.plain {
 	background: none;
+}
+
+.reveal section img {
+	border-color: white;
 }
 
 .reveal section.disclaimer h2{
@@ -37,6 +41,13 @@ $headingColor: #101010;
   font-size: 20px;
 }
 
+.reveal .grid {
+    display: flex;
+}
+.reveal .col{
+    flex: 1;
+}
+
 /* 1. Style header/footer <div> so they are positioned as desired. */
 #header-left {
     position: absolute;
@@ -44,7 +55,8 @@ $headingColor: #101010;
     left: 0%;
     margin-left: 30px;
     margin-top: 30px;
-    color: #A66E2C;
+    color: white;
+    font-weight: bold;
 }
 #header-right {
     position: absolute;
@@ -52,7 +64,8 @@ $headingColor: #101010;
     right: 0%;
     margin-right: 30px;
     margin-top: 30px;
-    color: #A66E2C;
+    color: white;
+    font-weight: bold;
 }
 #footer-left {
     position: absolute;
@@ -61,6 +74,7 @@ $headingColor: #101010;
     margin-left: 10px;
     margin-bottom: 10px;
 }
+
 .reveal .footer-right {
     position: absolute;
     bottom: 0%;
@@ -69,7 +83,28 @@ $headingColor: #101010;
     margin-bottom: 0;
 }
 
+.reveal .emoji-font {
+    font-family: Apple Color Emoji,Segoe UI,Segoe UI Emoji,Segoe UI Symbol;
+}
 .reveal .footer-emoji {
   font-family: Apple Color Emoji,Segoe UI,Segoe UI Emoji,Segoe UI Symbol;
   font-size: 3.77em;
+}
+
+.reveal div.sourceCode pre.sourceCode {
+  background-color: #f8f8f8;
+}
+
+.reveal code.cli {
+  background-color: #d1d1d1;
+  border-radius: 0.1em;
+  white-space: nowrap;
+}
+
+.reveal section.txt-orange h2, .reveal section.txt-orange h1 {
+  // color: #ED9D3F;
+	color: #ED8000;
+}
+.reveal section.txt-padtop h1 {
+ padding-bottom: 0.5em;
 }
