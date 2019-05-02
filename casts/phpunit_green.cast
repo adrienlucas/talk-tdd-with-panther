@@ -1,0 +1,11 @@
+{"version": 2, "env": {"SHELL": "/bin/bash", "TERM": "xterm"}, "width": 137, "timestamp": 1556132551, "height": 35}
+[0.003217, "o", "$ bin/phpunit\r\n"]
+[0.140599, "o", "#!/usr/bin/env php\r\n"]
+[0.184618, "o", "PHPUnit 6.5.14 by Sebastian Bergmann and contributors.\r\n\r\n"]
+[0.18509, "o", "Testing Project Test Suite\r\n"]
+[0.372843, "o", "."]
+[0.402245, "o", "."]
+[0.433456, "o", "."]
+[0.478405, "o", ".                                                                4 / 4 (100%)"]
+[0.478637, "o", "\r\n\r\nTime: 339 ms, Memory: 24.00MB\r\n\r\n\u001b[30;42mOK (4 tests, 14 assertions)\u001b[0m\r\n"]
+[1.483386, "o", ""]

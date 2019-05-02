@@ -1,1 +1,453 @@
-../slides.html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Le TDD dans la vraie vie avec Panther</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="/css/reveal.css">
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/css/theme/custom.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '/css/print/pdf.css' : '/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="le-tdd-dans-la-vraie-vie-avec-panther" class="title-slide slide level1"><h1>Le TDD dans la vraie vie avec Panther</h1></section><section id="whoami--a" class="slide level2">
+<h2><code class="cli">$ whoami -a</code></h2>
+</section><section id="avertissement" class="slide level2 disclaimer" data-background="#000000">
+<h2>Avertissement :</h2>
+<div class="fragment">
+<h3 id="toute-ressemblance-avec-du-code-de-production-existant-ou-ayant-existé-ne-serait-être-que-fortuite.">Toute ressemblance avec du code de production existant ou ayant existé ne serait être que fortuite.</h3>
+</div>
+</section><section id="jour-1" class="slide level2">
+<h2>Jour 1</h2>
+<p><img data-src="images/code_rot_1.png" /></p>
+<h3 id="section" class="footer-right footer-emoji"><span class="emoji" data-emoji="grin">😁</span></h3>
+</section><section id="jour-13" class="slide level2" data-transition="slide fide-out">
+<h2>… Jour 13</h2>
+<p><img data-src="images/code_rot_2.png" class="plain" /></p>
+</section><section id="jour-13-1" class="slide level2" data-transition="fide-in slide">
+<h2>… Jour 13</h2>
+<p><img data-src="images/code_rot_2_highlighted.png" class="plain" /></p>
+<h3 id="section-1" class="footer-right footer-emoji"><span class="emoji" data-emoji="fearful">😨</span></h3>
+</section><section id="jour-42" class="slide level2" data-transition="slide fide-out">
+<h2>… Jour 42</h2>
+<p><img data-src="images/code_rot_3.png" class="plain" /></p>
+</section><section id="jour-42-1" class="slide level2" data-transition="fide-in slide">
+<h2>… Jour 42</h2>
+<p><img data-src="images/code_rot_3_highlighted.png" class="plain" /></p>
+<h3 id="section-2" class="footer-right footer-emoji"><span class="emoji" data-emoji="sob">😭</span></h3>
+</section><section id="sujets-abordés" class="slide level2">
+<h2>Sujets abordés :</h2>
+<ul>
+<li class="fragment">Le TDD ? Quoi, pourquoi, comment ?</li>
+<li class="fragment">A wild Panther appears !</li>
+<li class="fragment">Live coding</li>
+</ul>
+</section><section id="the-broken-windows-theory" class="slide level2 txt-orange" data-background="images/broken_window_big.jpg">
+<h2>The Broken Windows Theory</h2>
+<aside class="notes">
+<p>1982 James Wilson (sociologue) &amp; George Kelling (criminologue)</p>
+</aside>
+</section><section id="nettoyer-la-rue-pour-réduire-le-crime" class="slide level2">
+<h2>Nettoyer la rue pour réduire le crime</h2>
+<div class="grid">
+<div class="col">
+<p><img data-src="images/fantasia.gif" class="plain" style="max-width: 70%;" /></p>
+</div>
+<div class="col">
+<p><img data-src="images/voisins_vigilants.png" class="plain" style="max-width: 50%;" /></p>
+</div>
+</div>
+<aside class="notes">
+<p>En <strong>2005 à Lowell</strong> dans le Massachusetts, la police a identifié <strong>34 “lieux de criminalité”</strong>. Sur la <strong>moitiée d’entre eux, la mairie nettoyat les ordures, réparat les éclairages publiques, encourageat les rénovations de batiments privé, déployat des aides aux sans-abris</strong>. Sur l’autre moitiée, aucune actions particulière ne fut entreprie.</p>
+<p>Après quelques temps, la police constatat <strong>une baisse de 20% des appels d’urgence</strong> pour les lieux ayant reçus une attention particulière des authorités.</p>
+<p>Il faut corriger les mauvaise pratiques le plus tôt possible pour êviter que les dégats s’étendent.</p>
+</aside>
+</section></section>
+<section><section id="code-rots" class="title-slide slide level1"><h1><img data-src="images/apples_rotting.png" class="plain" /> “Code rots !”</h1></section><section id="sans-tests" class="slide level2">
+<h2>Sans tests</h2>
+<div class="grid">
+<div class="col">
+<ul>
+<li class="fragment">Chaque <strong>modification</strong> est un <strong>bug potentiel</strong>.</li>
+<li class="fragment">Le <strong>coût</strong> des évolutions est <strong>en hausse</strong>.</li>
+<li class="fragment">La <strong>satisfaction</strong> client <strong>diminue</strong>.</li>
+</ul>
+</div>
+<div class="col">
+<p><img data-src="images/castle_of_cards_collapses.gif" class="plain" /></p>
+</div>
+</div>
+<aside class="notes">
+<p>On a tous connu cette classe de 1500 lignes, que personne ne veut toucher, même du bout d’un baton.</p>
+</aside>
+<h3 id="section-3" class="footer-emoji footer-right fragment"><span class="emoji" data-emoji="disappointed_relieved">😥</span></h3>
+</section><section class="slide level2">
+
+<h3 id="rapport-de-la-qualité-de-la-couverture-de-tests-sur-le-niveau-de-flexibilité-du-code">Rapport de la qualité de la couverture de tests sur le niveau de flexibilité du code</h3>
+<p><img data-src="images/fear_x_coverage.png" class="plain" /></p>
+<aside class="notes">
+<p>Le moins de tests, le plus de peur d’introduire des changements, refacto, nettoyages. Le plus de tests, le plus de flexibilité.</p>
+<p>A noter que la courbe n’atteint jamais 0 en ordonnée car on ne peut jamais être vraiment sûr qu’aucun bug n’existe, mais on peut toujours rajouter toujours plus de tests si on le souhaite (q: mais doit-on le faire ? a: non). On imagine qu’à 0 couverture de tests, la peur tend vers l’infinie.</p>
+<p>Une des choses les plus difficile lorsque que l’on écrit de tests est de savoir quoi tester, où s’arrêter.</p>
+</aside>
+</section><section id="avec-une-couverture-de-tests" class="slide level2" data-transition="slide fide-out">
+<h2>Avec une couverture de tests…</h2>
+<p>Le code source de notre application devient<br />
+<strong>flexible</strong>.</p>
+<aside class="notes">
+<p>Les tests permettent d’introduire des changements dans la structure même de notre code.</p>
+<p>Même des gros changements, des refactoring touchant plusieurs classes, réorganisant un gros morceau de code.</p>
+</aside>
+</section><section id="avec-une-couverture-de-tests-1" class="slide level2" data-transition="fide-in slide">
+<h2>Avec une couverture de tests…</h2>
+<p>Les développeurs n’ont plus <strong>la crainte de casser le système</strong> à chaque incrément.</p>
+<aside class="notes">
+<p>En introduisant un changement ou en faisant un simple refactoring de nettoyage</p>
+<p>Finie la peur de livrer une release le vendredi !</p>
+</aside>
+<h3 id="section-4" class="footer-emoji footer-right"><span class="emoji" data-emoji="thumbsup">👍</span></h3>
+</section><section id="autres-avantages" class="slide level2">
+<h2>Autres avantages</h2>
+<div class="grid">
+<div class="col">
+<ul>
+<li class="fragment">Pas de tests manuels, répétitifs et ennuyeux.</li>
+<li class="fragment">Pas d’oublis ou erreurs de manipulation.</li>
+<li class="fragment">Montées de versions facilitées.</li>
+</ul>
+</div>
+<div class="col">
+<p><img data-src="images/modern_times.gif" class="plain" /></p>
+</div>
+</div>
+<aside class="notes">
+<p>Rien de plus agréable que de pouvoir s’assurer en une ligne de commande qu’une montée de version n’entraîne aucun bug ou régression. Mieux qu’un outil d’analyse statique !</p>
+<p>Les cahiers de tests exécutés par des testeurs professionnels doivent être limité au maximum (supprimé?). L’automatisation, pilier de l’industrialisation, laisse au humain le temps de se consacrer au taches qui demande de la créativité et de l’intuition.</p>
+<p>Le testeur est sujet aux erreurs, comme tout technicien. L’écriture de tests automatisé, codés en pair-programming, relus par le reste de l’équipe, laisse moins facilement passé les erreurs, couvre souvent plus de cas, et avant tout, une fois écris, ils sont exécuté rapidement et de manière exhaustive.</p>
+</aside>
+</section><section id="la-métaphore-du-chirurgien" class="slide level2 txt-orange" data-background="images/surgeons_waching_hands.jpg">
+<h2>La métaphore du chirurgien</h2>
+<aside class="notes">
+<p>Par Robert Martin (Uncle Bob) Le chirurgien ne demande pas à son patient si, une fois sur la table d’opération, il doit se laver les mains avant de réaliser l’opération à coeur-ouvert. Le chirurgien est un professionnel qui connaît son métier, et il sait que la seule manière de bien faire son travail, sans risquer la vie de ses patient, est de maintenir une hygiène irréprochable dans le bloc opératoire.</p>
+<p>A l’instar du chirurgien, le développeur ne doit pas attendre l’accord de son manager ou de son client pour mettre en place une suite de tests. Le développeur, en bon professionnel du code, sait que le seul moyen de faire son travail sérieusement, sans risquer d’instabilité ou de bugs, est de couvrir les fonctionnalités qu’il réalise avec des scénario d’acceptance automatisés, des tests.</p>
+</aside>
+</section></section>
+<section><section id="développement-dirigé-par-les-tests" class="title-slide slide level1"><h1>Développement dirigé par les tests</h1></section><section id="les-3-lois-du-tdd" class="slide level2" data-transition="slide fide-out">
+<h2>Les 3 lois du TDD</h2>
+<h3 id="n1-vous-ne-devez-pas-écrire-de-code-de-production-tant-que-vous-navez-pas-un-test-en-erreur."><strong>N°1</strong> : Vous ne devez pas écrire de code de production tant que vous n’avez pas un test en erreur.</h3>
+<aside class="notes">
+<p>Tant que phpunit n’est pas en erreur, pas d’écriture dans <code>src/</code>.</p>
+</aside>
+</section><section id="les-3-lois-du-tdd-1" class="slide level2" data-transition="fide-in fide-out">
+<h2>Les 3 lois du TDD</h2>
+<h3 id="n2-vous-ne-devez-pas-écrire-plus-de-lignes-de-test-quil-nen-faut-pour-quun-test-soit-en-erreur."><strong>N°2</strong> : Vous ne devez pas écrire plus de lignes de test qu’il n’en faut pour qu’un test soit en erreur.</h3>
+<aside class="notes">
+<p>Quand phpunit est en erreur, plus d’écriture dans <code>tests/</code>.</p>
+</aside>
+</section><section id="les-3-lois-du-tdd-2" class="slide level2" data-transition="fide-in slide">
+<h2>Les 3 lois du TDD</h2>
+<h3 id="n3-vous-ne-devez-pas-écrire-plus-de-code-de-production-quil-nen-faut-pour-que-le-test-passe."><strong>N°3</strong> : Vous ne devez pas écrire plus de code de production qu’il n’en faut pour que le test passe.</h3>
+<aside class="notes">
+<p>Quand phpunit n’est plus en erreur, plus d’écriture dans <code>src/</code>. Retour à la régle N°1.</p>
+</aside>
+</section><section id="red" class="slide level2">
+<h2>Red</h2>
+<p><asciinema-player src="casts/phpunit_red.cast" autoplay="true" preload="true" loop="true" speed="0.2" cols="82" rows="20"></asciinema-player></p>
+<h3 id="section-5" class="footer-right footer-emoji"><span class="emoji" data-emoji="exclamation">❗</span></h3>
+</section><section id="green" class="slide level2">
+<h2>Green</h2>
+<p><asciinema-player src="casts/phpunit_green.cast" autoplay="true" preload="true" loop="true" speed="0.2" cols="82" rows="12"></asciinema-player></p>
+<h3 id="section-6" class="footer-right footer-emoji"><span class="emoji" data-emoji="white_check_mark">✅</span></h3>
+</section><section id="refactor" class="slide level2">
+<h2>Refactor <span class="emoji" data-emoji="construction_worker">👷</span></h2>
+<div class="grid">
+<div class="col fragment">
+<p><img data-src="images/failures.png" class="plain" /> <img data-src="images/burning.gif" class="plain" style="width:85%;" /></p>
+</div>
+<div class="col fragment">
+<p><img data-src="images/more_failures.png" class="plain" /> <img data-src="images/burning_more.gif" class="plain" /></p>
+</div>
+<div class="col fragment">
+<p><img data-src="images/success.png" class="plain" /> <img data-src="images/brilliant.gif" class="plain" /></p>
+</div>
+</div>
+</section><section id="la-meilleure-façon" class="slide level2">
+<h2>La meilleure façon …</h2>
+<div class="grid">
+<div class="col">
+<p><img data-src="images/smart.gif" class="plain" /></p>
+</div>
+<div class="col">
+<ul>
+<li class="fragment">de respecter les <strong>principes SOLID</strong>.</li>
+<li class="fragment">d’assurer <strong>l’exhaustivité</strong> de la couverture.</li>
+<li class="fragment">d’avoir du <strong>code testable</strong>.</li>
+<li class="fragment">d’assurer <strong>la satisfaction</strong> client.</li>
+</ul>
+</div>
+</div>
+</section><section id="problème" class="slide level2">
+<h2>Problème :</h2>
+<p>Comment <strong>limiter les coûts</strong> de maintenance de la suite de tests ?</p>
+</section></section>
+<section><section id="section-7" class="title-slide slide level1 txt-orange txt-padtop" data-background="images/buzz_meme_small.jpg"><h1></h1></section><section id="tests-unitaires" class="slide level2" data-background="#00D89F">
+<h2>Tests unitaires</h2>
+<p><img data-src="images/puzzle_piece.png" class="plain" style="max-width: 50%;" /></p>
+<aside class="notes">
+<p>Couplage avec chaque petites unités de code, encapsulant sa logique propre qui a peu de chance de changer.</p>
+<p>Beaucoup de tests couvrant chaque petite unité de code.</p>
+</aside>
+</section><section id="tests-dintégration" class="slide level2" data-background="#00CCFF">
+<h2>Tests d’intégration</h2>
+<p><img data-src="images/puzzle_pieces.png" class="plain" style="max-width: 30%;" /></p>
+<aside class="notes">
+<p>Couplage avec le comportement des différentes briques entres elles, change au grès des demandes du client.</p>
+<p>Une quantité de test suffisante pour couvrir chacunes des demandes et assurer la non-régression.</p>
+</aside>
+</section><section id="tests-de-bout-en-bout" class="slide level2" data-background="#FF90DC">
+<h2>Tests de bout-en-bout</h2>
+<p><img data-src="images/puzzle_full.jpg" class="plain" style="max-width: 20%;" /></p>
+<aside class="notes">
+<p>Aussi appelés “tests en boîte noire” ou “end to end”. Couplage fort avec l’interface qui est plus encline à changer.</p>
+<p>Peu de tests, uniquement les chemins critiques de l’application.</p>
+</aside>
+</section></section>
+<section><section id="la-pyramide-de-tests" class="title-slide slide level1 txt-orange txt-padtop" data-background="images/egypt_pyramids.jpg"><h1>La pyramide de tests</h1></section><section class="slide level2">
+
+<p><img data-src="images/pyramid_with_costs_colored.png" class="plain" /></p>
+</section><section id="un-outil-pour-chaque-usage-et-un-usage-par-outil" class="slide level2">
+<h2>Un outil pour chaque usage, et un usage par outil</h2>
+<p><img data-src="images/pyramid_with_tools_colored.png" class="plain" /></p>
+</section><section id="des-tests-oui-mais-à-quel-prix" class="slide level2">
+<h2>Des tests oui, mais à quel prix ? <img data-src="images/how_much.gif" class="plain" /></h2>
+</section></section>
+<section><section id="section-8" class="title-slide slide level1"><h1><img data-src="images/panther_logo_alpha.png" class="plain" style="width: 25%;" /></h1></section><section class="slide level2">
+
+<p><img data-src="images/w3c_logo.png" class="plain" /></p>
+<h3 id="compatible-avec-la-norme-webdriver-du-w3c.">Compatible avec la norme WebDriver du W3C.</h3>
+<aside class="notes">
+<p>Nouvelle norme visant basiquement à remplacer Selenium. Permet de piloter un navigateur “headless”.</p>
+</aside>
+</section><section id="section-9" class="slide level2">
+<h2><img data-src="images/panther_github.png" /></h2>
+<aside class="notes">
+<p>Projet initié par Kévin Dunglas, et notament sponsorisé par la Coop des Tilleuls. Le nouveau framework de test end-to-end !</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="dépendance-sur-le-paquet-facebookwebdriver">Dépendance sur le paquet <code class="cli">facebook/webdriver</code></h3>
+<p><img data-src="images/facebook_webdriver_github.png" /></p>
+<aside class="notes">
+<p>Implémentation de la norme, compatible avec Chrome et Firefox. Utilisé par <strong>Laravel Dusk</strong> et par <strong>CodeSeption</strong> Pas encore de support officiel dans behat-mink</p>
+</aside>
+</section><section id="nouveau-pas-tant-que-ça" class="slide level2">
+<h2>“Nouveau” ? Pas tant que ça…</h2>
+</section><section id="kerneltestcase" class="slide level2" data-transition="slide fade-out">
+<h2>KernelTestCase</h2>
+<p><img data-src="images/code_kerneltestcase_structure.png" class="plain" /></p>
+<aside class="notes">
+<p>Pour tester vos services et vos commandes de console</p>
+</aside>
+</section><section id="kerneltestcase-1" class="slide level2" data-transition="fade-in slide">
+<h2>KernelTestCase</h2>
+<p><img data-src="images/code_kerneltestcase_structure_highlighted.png" class="plain" /></p>
+</section><section id="webtestcase" class="slide level2" data-transition="slide fade-out">
+<h2>WebTestCase</h2>
+<p><img data-src="images/code_webtestcase_structure.png" class="plain" /></p>
+</section><section id="webtestcase-1" class="slide level2" data-transition="fade-in slide">
+<h2>WebTestCase</h2>
+<p><img data-src="images/code_webtestcase_structure_highlighted.png" class="plain" /></p>
+<aside class="notes">
+<p>Pour tester le fonctionnement de votre code et de votre configuration au sein du framework Request-Response, pas de Javascript ou de CSS, pas d’utilisation réél d’HTTP.</p>
+</aside>
+</section><section id="panthertestcase" class="slide level2" data-transition="slide fade-out">
+<h2>PantherTestCase</h2>
+<p><img data-src="images/code_panthertestcase_structure.png" class="plain" /></p>
+</section><section id="panthertestcase-1" class="slide level2" data-transition="fade-in slide">
+<h2>PantherTestCase</h2>
+<p><img data-src="images/code_panthertestcase_structure_highlighted.png" class="plain" /></p>
+</section><section id="de-nombreuses-fonctionnalités" class="slide level2" data-transition="slide fade-out">
+<h2>De nombreuses fonctionnalités</h2>
+<p><img data-src="images/code_panther_features.png" class="plain" /></p>
+</section><section id="de-nombreuses-fonctionnalités-1" class="slide level2" data-transition="fade-in fade-out">
+<h2>De nombreuses fonctionnalités</h2>
+<p><img data-src="images/code_panther_features_hl1.png" class="plain" /></p>
+</section><section id="de-nombreuses-fonctionnalités-2" class="slide level2" data-transition="fade-in fade-out">
+<h2>De nombreuses fonctionnalités</h2>
+<p><img data-src="images/code_panther_features_hl2.png" class="plain" /></p>
+</section><section id="de-nombreuses-fonctionnalités-3" class="slide level2" data-transition="fade-in slide">
+<h2>De nombreuses fonctionnalités</h2>
+<p><img data-src="images/code_panther_features_hl3.png" class="plain" /></p>
+</section><section id="plug-and-play" class="slide level2">
+<h2>Plug and play !</h2>
+<p><img data-src="images/guitar.gif" class="plain" /></p>
+</section></section>
+<section><section id="live-coding" class="title-slide slide level1"><h1>Live Coding</h1></section><section id="critiques-de-lannée-en-cours" class="slide level2" data-transition="slide fade-in">
+<h2>#1: Critiques de l’année en cours</h2>
+<p><img data-src="images/demo.png" class="plain" /></p>
+</section><section id="critiques-de-lannée-en-cours-1" class="slide level2" data-transition="fade-out fade-out">
+<h2>#1: Critiques de l’année en cours</h2>
+<p><img data-src="images/demo_hl_url.png" class="plain" /></p>
+</section><section id="critiques-de-lannée-en-cours-2" class="slide level2" data-transition="fade-in slide">
+<h2>#1: Critiques de l’année en cours</h2>
+<p><img data-src="images/demo_hl_list.png" class="plain" /></p>
+</section><section id="critiques-de-lannée-passée" class="slide level2" data-transition="slide fade-in">
+<h2>#2: Critiques de l’année passée</h2>
+<p><img data-src="images/demo_2018.png" class="plain" /></p>
+</section><section id="critiques-de-lannée-passée-1" class="slide level2" data-transition="fade-out fade-out">
+<h2>#2: Critiques de l’année passée</h2>
+<p><img data-src="images/demo_2018_hl_url.png" class="plain" /></p>
+</section><section id="critiques-de-lannée-passée-2" class="slide level2" data-transition="fade-in slide">
+<h2>#2: Critiques de l’année passée</h2>
+<p><img data-src="images/demo_2018_hl_list.png" class="plain" /></p>
+</section><section id="changer-lannée-sans-rechargement" class="slide level2" data-transition="slide fade-in">
+<h2>#3: Changer l’année sans rechargement</h2>
+<p><img data-src="images/demo.png" class="plain" /></p>
+</section><section id="changer-lannée-sans-rechargement-1" class="slide level2" data-transition="fade-out slide">
+<h2>#3: Changer l’année sans rechargement</h2>
+<p><img data-src="images/demo_hl_list_ajax.png" class="plain" /></p>
+</section></section>
+<section><section id="pour-aller-plus-loin" class="title-slide slide level1"><h1>Pour aller plus loin <span class="emoji" data-emoji="rocket">🚀</span></h1></section><section id="quelques-conseils-pour-améliorer-la-qualité-de-votre-suite-de-tests" class="slide level2">
+<h2>Quelques conseils pour améliorer la qualité de votre suite de tests</h2>
+<ul>
+<li class="fragment">Allez droit au but</li>
+<li class="fragment">Evitez les structures imbriquées</li>
+<li class="fragment">Evitez les expressions complexes</li>
+<li class="fragment">Pas d’abréviation</li>
+<li class="fragment"><strong>Soyez explicite, la lisibilité est primordiale</strong></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Aller droit au but (eviter les instructions d’initialisation “polluantes”)</li>
+<li>Structures et expressions claires et simples (un test doit se lire comme du text en langage humain)</li>
+<li>Pas d’abréviations (pour la même raison qu’au dessus)</li>
+<li>Pas de duplication de code (duplications à supprimer lors de la phase de refacto)</li>
+</ul>
+</aside>
+</section><section id="suivez-le-principe-f.i.r.s.t." class="slide level2">
+<h2>Suivez le principe F.I.R.S.T.</h2>
+<h3 id="fast" class="fragment">Fast</h3>
+<h3 id="independent" class="fragment">Independent</h3>
+<h3 id="repeatable" class="fragment">Repeatable</h3>
+<h3 id="self-validating" class="fragment">Self-validating</h3>
+<h3 id="timely" class="fragment">Timely</h3>
+<aside class="notes">
+<p>Sources manquantes Clean Code de Robert Martin dit “Object Mentor Training Materials”.</p>
+</aside>
+</section><section id="jouez-vos-tests-dans-un-saas" class="slide level2">
+<h2>Jouez vos tests dans un SAAS !</h2>
+<div class="grid">
+<div class="col">
+<p><img data-src="images/saucelabs.png" class="plain" style="" /></p>
+</div>
+<div class="col">
+<p><img data-src="images/browserstack.png" class="plain" style="" /></p>
+</div>
+</div>
+</section><section id="utilisez-panther-en-standalone." class="slide level2">
+<h2>Utilisez Panther en <em>standalone</em>.</h2>
+<aside class="notes">
+<p>pour vos projets legacy Installez ces deux dépendances au niveau global via <code>composer req --global panther</code></p>
+</aside>
+</section><section id="soyez-plus-agile-avec-behat" class="slide level2">
+<h2>Soyez plus agile avec Behat !</h2>
+<p><img data-src="images/agile.gif" class="plain" style="" /></p>
+</section><section id="essayez-le-mutation-testing" class="slide level2">
+<h2>Essayez le “mutation testing” …</h2>
+<aside class="notes">
+<p>mutation testing :</p>
+<ul>
+<li>tu fais une copie de ton dossier src/</li>
+<li>tu introduis des “erreurs” dans le code (par ex : remplacer !== par ===; remplacer <code>return true;</code> par <code>return false;</code>)</li>
+<li>tu fais tourner ta test-suite avec ce src/ tout pourri</li>
+<li>tu regarde quels tests sont bien en erreur (ils couvrent bien ton code), et surtout quels tests reste OK, vert, donc ne détecte pas le brin qui a été introduis dans la code-base</li>
+<li>et tu peux donc en déduire que ces tests ne couvrent pas bien ton code, ils laissent passer les potentielles erreurs</li>
+</ul>
+</aside>
+</section></section>
+<section><section id="thank-you" class="title-slide slide level1"><h1>Thank you !</h1></section><section id="section-10" class="slide level2">
+<h2><img data-src="images/logo_smile_big_orange.png" class="plain" /></h2>
+</section><section id="merci-à-tous-les-contributeurs" class="slide level2">
+<h2>Merci à tous les contributeurs !</h2>
+</section><section class="slide level2">
+
+<h3 id="questions">Questions ?</h3>
+<!--
+<div class="grid">
+  <div class="col">Red</div>
+  <div class="col">Green</div>
+  <div class="col">Refactor</div>
+</div>
+-->
+</section></section>
+    </div>
+  </div>
+
+  <script src="/lib/js/head.min.js"></script>
+  <script src="/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: 0,
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/plugin/zoom-js/zoom.js', async: true },
+          { src: '/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    <div id="hidden" style="display:none;">
+      <div id="header">
+          <div id="header-left">@adrienlucas</div>
+          <div id="header-right">#TDD #Panther #Symfony</div>
+          <div id="footer-left"><img src="images/sflive.png" height="130px" /></div>
+      </div>
+  </div>
+  
+  <script src="js/jquery-2.2.4.min.js"></script>
+  <script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $("#header").html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( "ready", function( event ) {
+            $(".slide-background:not(.disclaimer)").append(header);
+        });
+    }
+    else {
+        $("div.reveal").append(header);
+   }
+  </script>
+  <link rel="stylesheet" type="text/css" href="asciinema/asciinema-player.css" />
+  <script src="asciinema/asciinema-player.js"></script>
+    </body>
+</html>

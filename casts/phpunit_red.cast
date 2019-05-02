@@ -1,0 +1,13 @@
+{"width": 137, "version": 2, "height": 35, "timestamp": 1556132136, "env": {"TERM": "xterm", "SHELL": "/bin/bash"}}
+[0.004675, "o", "$ bin/phpunit\r\n"]
+[0.042816, "o", "#!/usr/bin/env php\r\n"]
+[0.075558, "o", "PHPUnit 6.5.14 by Sebastian Bergmann and contributors.\r\n\r\n"]
+[0.076019, "o", "Testing Project Test Suite\r\n"]
+[0.277461, "o", "."]
+[0.306574, "o", "."]
+[0.357474, "o", "\u001b[41;37mF\u001b[0m"]
+[0.385978, "o", ".                                                                4 / 4 (100%)"]
+[0.386119, "o", "\r\n\r\nTime: 344 ms, Memory: 24.00MB\r\n\r\nThere was 1 failure:\r\n\r\n1) App\\Tests\\ListReviewsTest::testItShowsTheReviewsFromThisYear\r\n"]
+[0.391917, "o", "Failed asserting that '' contains \"some review content\".\r\n\r\n/home/adluc/www/gitlab/adrienlucas/my-restaurant/tests/Controller/ListReviewsTest.php:19\r\n\r\n\u001b[37;41mFAILURES!\u001b[0m\r\n"]
+[0.392069, "o", "\u001b[37;41mTests: 4\u001b[0m\u001b[37;41m, Assertions: 11\u001b[0m\u001b[37;41m, Failures: 1\u001b[0m\u001b[37;41m.\u001b[0m\r\n"]
+[2.392069, "o", ""]
